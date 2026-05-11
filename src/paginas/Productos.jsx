@@ -100,6 +100,11 @@ const Productos = () => {
     return 'Disponible';
   };
 
+  const valorTotalInventario = productos.reduce(
+  (total, producto) => total + (producto.precio * producto.stock),
+  0
+  );
+
   return (
     <>
       <Cabeza />
@@ -124,6 +129,12 @@ const Productos = () => {
                 <span className="stats-badge">
                   <i className="bi bi-exclamation-triangle"></i> {productos.filter(p => p.stock > 0 && p.stock <= p.stockMinimo).length} stock bajo
                 </span>
+                <span className="stats-badge">
+                <i className="bi bi-cash-stack"></i>
+                S/ {valorTotalInventario.toFixed(2)}
+                </span>
+
+                
               </p>
             </div>
             <div className="header-right">
