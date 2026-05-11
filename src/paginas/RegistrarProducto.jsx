@@ -30,8 +30,7 @@ const RegistrarProducto = () => {
   const [guardando, setGuardando] = useState(false);
   const [imagenValida, setImagenValida] = useState(true);
 
-  // Expresión regular para validar URL de imagen
-  const urlRegex = /https?:\/\/.*\.(?:png|jpg|jpeg|webp|gif|svg)/i;
+
 
   // Validar sesión
   useEffect(() => {
@@ -118,15 +117,10 @@ const RegistrarProducto = () => {
     }
 
     // Validar URL de imagen
-    if (!formData.imagen) {
-      alert('❌ La URL de la imagen es obligatoria');
-      return false;
-    }
-
-    if (!urlRegex.test(formData.imagen)) {
-      alert('❌ La URL de la imagen debe ser válida (png, jpg, jpeg, webp, gif)');
-      return false;
-    }
+   if (!formData.imagen) {
+  alert('❌ Debe agregar una imagen');
+  return false;
+}
 
     return true;
   };
@@ -178,6 +172,26 @@ const RegistrarProducto = () => {
       navigate('/productos');
     }
   };
+
+  const manejarImagenLocal = (e) => {
+  const archivo = e.target.files[0];
+
+  if (!archivo) return;
+
+  const lector = new FileReader();
+
+  lector.onloadend = () => {
+    setFormData({
+      ...formData,
+      imagen: lector.result
+    });
+
+    setPreviewUrl(lector.result);
+    setImagenValida(true);
+  };
+
+  lector.readAsDataURL(archivo);
+};
 
   return (
     <>
@@ -386,34 +400,28 @@ const RegistrarProducto = () => {
                           onError={handleImageError}
                         />
                         
-                        <div className="imagen-url-container">
-                          <label className="form-label fw-bold">
-                            <i className="bi bi-link-45deg"></i>
-                            URL de la Imagen <span className="text-danger">*</span>
-                          </label>
-                          <input 
-                            type="url" 
-                            className={`form-control-moderno ${!imagenValida && formData.imagen ? 'is-invalid' : ''}`}
-                            name="imagen"
-                            value={formData.imagen}
-                            onChange={handleChange}
-                            placeholder="https://ejemplo.com/producto.jpg"
-                            required
-                          />
-                          {!imagenValida && formData.imagen && (
-                            <div className="invalid-feedback d-block">
-                              <i className="bi bi-exclamation-circle"></i> URL de imagen no válida
-                            </div>
-                          )}
-                          <small className="form-text text-muted">
-                            <i className="bi bi-file-earmark-image"></i> Formatos: JPG, PNG, WEBP, GIF
-                          </small>
-                        </div>
+                        <div className="form-group">
+  <label>
+    <i className="bi bi-image"></i>
+    Subir Imagen Local
+  </label>
+
+  <input
+    type="file"
+    accept="image/*"
+    onChange={manejarImagenLocal}
+    className="form-control"
+  />
+
+  <small className="text-muted">
+    Formatos permitidos: JPG, PNG, WEBP, GIF
+  </small>
+</div>
 
                         <div className="imagen-info">
                           <i className="bi bi-info-circle-fill"></i>
                           <span>
-                            Ingresa una URL válida de imagen. 
+                            Puedes subir una imagen desde tu computadora.
                             La vista previa se actualizará automáticamente.
                           </span>
                         </div>
