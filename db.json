@@ -1,0 +1,81 @@
+{
+  "productos": [
+    {
+      "name": "Add your name in the body",
+      "id": "1"
+    },
+    {
+      "id": "3",
+      "nombre": "Buzo con Capucha",
+      "categoria": "buzos",
+      "talla": "XL",
+      "color": "Gris",
+      "precio": 89.9,
+      "stock": 3,
+      "stockMinimo": 3,
+      "disponible": true,
+      "imagen": "https://via.placeholder.com/150",
+      "fechaRegistro": "2024-01-25"
+    },
+    {
+      "id": "cf87",
+      "name": "Add your name in the body"
+    },
+    {
+      "id": "e10a",
+      "name": "Add your name in the body"
+    },
+    {
+      "id": "2677",
+      "name": "Add your name in the body"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "nombre": "Administrador",
+      "rol": "Administrador",
+      "activo": true
+    },
+    {
+      "id": "2",
+      "username": "vendedor",
+      "password": "vend123",
+      "nombre": "Juan Pérez",
+      "rol": "Vendedor",
+      "activo": true
+    },
+    {
+      "id": "3",
+      "username": "almacen",
+      "password": "alma123",
+      "nombre": "María García",
+      "rol": "Almacenero",
+      "activo": true
+    }
+  ],
+  "categorias": [
+    {
+      "id": "1",
+      "nombre": "Polos",
+      "valor": "polos"
+    },
+    {
+      "id": "2",
+      "nombre": "Poleras",
+      "valor": "poleras"
+    },
+    {
+      "id": "3",
+      "nombre": "Buzos",
+      "valor": "buzos"
+    },
+    {
+      "id": "4",
+      "nombre": "Shorts",
+      "valor": "shorts"
+    }
+  ]
+}
