@@ -9,7 +9,6 @@ const Productos = () => {
   const [productos, setProductos] = useState([]);
   const [busqueda, setBusqueda] = useState('');
   const [categoriaFiltro, setCategoriaFiltro] = useState('todas');
-  const [ordenPrecio, setOrdenPrecio] = useState('');
   const [productosFiltrados, setProductosFiltrados] = useState([]);
 
   useEffect(() => {
@@ -39,22 +38,16 @@ const Productos = () => {
 
     if (categoriaFiltro !== 'todas') {
       filtrados = filtrados.filter(p => p.categoria === categoriaFiltro);
-      
-    if (ordenPrecio === 'menor') {
-        filtrados.sort((a, b) => a.precio - b.precio);
-    }
 
-    if (ordenPrecio === 'mayor') {
-  filtrados.sort((a, b) => b.precio - a.precio);
-    }
     }
 
     setProductosFiltrados(filtrados);
   };
 
   useEffect(() => {
-    filtrarProductos();
-  }, [busqueda, categoriaFiltro, productos, ordenPrecio]);
+  filtrarProductos();
+}, [busqueda, categoriaFiltro, productos]);
+
 
   const editarProducto = (id) => {
     const producto = productos.find(p => p.id === id);
@@ -196,31 +189,7 @@ const Productos = () => {
                   </select>
                 </div>
               </div>
-
-              {/* Filtro por precios */}
-<div className="filtro-item">
-  <label className="filtro-label">
-    <i className="bi bi-cash"></i>
-    Ordenar por Precio
-  </label>
-
-  <div className="select-contenedor-filtro">
-    <i className="bi bi-chevron-down select-icono"></i>
-
-    <select
-      value={ordenPrecio}
-      onChange={(e) => setOrdenPrecio(e.target.value)}
-      className="filtro-select"
-    >
-      <option value="">Todos</option>
-      <option value="menor">Menor a mayor</option>
-      <option value="mayor">Mayor a menor</option>
-    </select>
-  </div>
-</div>
             </div>
-              
-             
 
             {/* Resultados */}
             <div className="resultados-info">
