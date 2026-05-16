@@ -184,61 +184,66 @@ const manejarImagenLocal = (e) => {
 
   const validarFormulario = () => {
 
-    if (formData.nombre.trim().length < 3) {
+  if (formData.nombre.trim().length < 3) {
+
+    alert(
+      'El nombre debe tener mínimo 3 caracteres'
+    );
+
+    return false;
+  }
+
+  if (parseFloat(formData.precio) <= 0) {
+
+    alert(
+      'El precio debe ser mayor a 0'
+    );
+
+    return false;
+  }
+
+  if (parseInt(formData.stock) < 0) {
+
+    alert(
+      'El stock no puede ser negativo'
+    );
+
+    return false;
+  }
+
+  if (
+    parseInt(formData.stockMinimo) >
+    parseInt(formData.stock)
+  ) {
+
+    alert(
+      'El stock mínimo no puede ser mayor al stock'
+    );
+
+    return false;
+  }
+
+  // Validar imagen local o URL
+  if (formData.imagen) {
+
+    const esUrlValida =
+      urlRegex.test(formData.imagen);
+
+    const esBase64 =
+      formData.imagen.startsWith('data:image/');
+
+    if (!esUrlValida && !esBase64) {
 
       alert(
-        'El nombre debe tener mínimo 3 caracteres'
+        'La imagen seleccionada no es válida'
       );
 
       return false;
     }
+  }
 
-    if (parseFloat(formData.precio) <= 0) {
-
-      alert(
-        'El precio debe ser mayor a 0'
-      );
-
-      return false;
-    }
-
-    if (parseInt(formData.stock) < 0) {
-
-      alert(
-        'El stock no puede ser negativo'
-      );
-
-      return false;
-    }
-
-    if (
-      parseInt(formData.stockMinimo) >
-      parseInt(formData.stock)
-    ) {
-
-      alert(
-        'El stock mínimo no puede ser mayor al stock'
-      );
-
-      return false;
-    }
-
-    // Validar URL
-    if (
-      formData.imagen &&
-      !urlRegex.test(formData.imagen)
-    ) {
-
-      alert(
-        'La URL de imagen no es válida'
-      );
-
-      return false;
-    }
-
-    return true;
-  };
-
+  return true;
+};
   // =========================================
   // Actualizado - Guardar producto
   // =========================================
@@ -600,56 +605,78 @@ const manejarImagenLocal = (e) => {
                   {/* IMAGEN */}
                   {/* ================================= */}
 
-                  <div className="col-lg-4">
+<div className="col-lg-4">
 
-                    <div className="imagen-card">
+  <div className="imagen-card">
 
-                      <div className="imagen-header">
+    <div className="imagen-header">
 
-                        <i className="bi bi-image"></i>
+      <i className="bi bi-image"></i>
 
-                        <h3>Imagen</h3>
+      <h3>Imagen del Producto</h3>
 
-                      </div>
+    </div>
 
-                      <img
-                        src={
-                          previewUrl ||
-                          'https://via.placeholder.com/300'
-                        }
-                        alt="Preview"
-                        className="imagen-preview"
-                        onError={handleImageError}
-                      />
+    {/* Vista previa */}
 
-                      <div className="form-group mt-3">
+    <div className="imagen-preview-container">
 
-                        <label>
+      <img
+        src={
+          previewUrl ||
+          'https://via.placeholder.com/300x300?text=Vista+Previa'
+        }
+        alt="Vista previa"
+        className="imagen-preview"
+        onError={handleImageError}
+      />
 
-                         <i className="bi bi-upload"></i>
+    </div>
 
-                        Seleccionar Archivo
+    {/* Subir imagen */}
 
-                        </label>
+    <div className="form-group mt-3">
 
-                      <input
-                          type="file"
-                          accept="image/*"
-                          onChange={manejarImagenLocal}
-                          className="form-control"
-                       />
+      <label className="form-label fw-bold">
 
-                      <small className="text-muted">
+        <i className="bi bi-upload me-2"></i>
 
-                         JPG, PNG, WEBP o GIF
+        Seleccionar Archivo
 
-                       </small>
+      </label>
 
-                      </div>
-              
-                    </div>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={manejarImagenLocal}
+        className="form-control"
+      />
 
-                  </div>
+      <small className="text-muted">
+
+        JPG, PNG, WEBP o GIF
+
+      </small>
+
+    </div>
+
+    {/* Información */}
+
+    <div className="imagen-info mt-3">
+
+      <i className="bi bi-info-circle-fill"></i>
+
+      <span>
+
+        La imagen se actualizará automáticamente.
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
 
                 </div>
 
