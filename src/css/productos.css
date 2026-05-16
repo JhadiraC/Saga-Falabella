@@ -111,3 +111,66 @@ select:focus {
     background-color: #e6f4ec;
     color: #008542;
 }
+/* ========================================
+   BUSCADOR DE PRODUCTOS - MODERNO
+   ======================================== */
+
+.buscador-container {
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.buscador-container input {
+    width: 100%;
+    max-width: 450px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 1.5px solid #dfe3e8;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: #ffffff;
+    color: #1f2937;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+/* Hover */
+.buscador-container input:hover {
+    border-color: #008542;
+    transform: translateY(-1px);
+}
+
+/* Focus */
+.buscador-container input:focus {
+    outline: none;
+    border-color: #008542;
+    box-shadow:
+        0 0 0 4px rgba(0,133,66,0.15),
+        0 6px 18px rgba(0,133,66,0.10);
+    transform: translateY(-2px);
+}
+
+/* Placeholder */
+.buscador-container input::placeholder {
+    color: #9ca3af;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .buscador-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .buscador-container input {
+        max-width: 100%;
+        font-size: 14px;
+    }
+}

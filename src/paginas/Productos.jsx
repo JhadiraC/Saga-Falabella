@@ -53,16 +53,22 @@ const Productos = () => {
     let filtrados = [...productos];
 
     // Buscar productos
-    if (busqueda.trim() !== '') {
+if (busqueda.trim() !== '') {
 
-      const termino = busqueda.toLowerCase();
+  const termino = busqueda.toLowerCase();
 
-      filtrados = filtrados.filter(producto =>
-        producto.nombre.toLowerCase().includes(termino) ||
-        producto.color.toLowerCase().includes(termino) ||
-        producto.categoria.toLowerCase().includes(termino)
-      );
-    }
+  filtrados = filtrados.filter(producto =>
+
+    producto.id.toString().includes(termino) ||
+
+    producto.nombre.toLowerCase().includes(termino) ||
+
+    producto.color.toLowerCase().includes(termino) ||
+
+    producto.categoria.toLowerCase().includes(termino)
+
+  );
+}
 
     // Filtrar por categoría
     if (categoriaFiltro !== 'todas') {
@@ -299,6 +305,20 @@ const Productos = () => {
             </div>
           </div>
 
+{/* BUSCADOR */}
+<div className="buscador-container">
+
+  <input
+    type="text"
+    className="form-control"
+    placeholder="Buscar por ID, nombre, color o categoría..."
+    value={busqueda}
+    onChange={(e) =>
+      setBusqueda(e.target.value)
+    }
+  />
+
+</div>
 
           {/* TABLA */}
           <div className="tabla-container">
